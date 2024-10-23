@@ -1,23 +1,19 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>برنامه هواشناسی</title>
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>وضعیت آب و هوا</h1>
-    </header>
-    <main>
-        <div class="current-weather" id="currentWeather"></div>
-        <input type="text" id="cityInput" placeholder="نام شهر را وارد کنید">
-        <button id="getWeatherBtn">دریافت وضعیت آب و هوا</button>
-    </main>
-    <footer>
-        <p>© 2023 برنامه هواشناسی</p>
-    </footer>
-    <script src="script.js"></script>
+    <div class="container">
+        <h1>Weather App</h1>
+        <p id="location">Fetching location...</p>
+        <p id="weather">Loading weather data...</p>
+        <button onclick="getWeather()">Refresh Weather</button>
+    </div>
+
+    <script src="app.js"></script>
 </body>
 </html>
