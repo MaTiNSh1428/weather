@@ -1,4 +1,4 @@
-const apiKey = 'YOUR_OPENWEATHERMAP_API_KEY';
+const apiKey = 'c9a4f275e624bc5e0f1f74643b945e88';
 
 function getWeather() {
     if (navigator.geolocation) {
