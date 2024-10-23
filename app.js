@@ -54,3 +54,16 @@ function fetchWeather(lat, lon) {
 }
 
 window.onload = getWeather;
+fetch(url)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        // نمایش اطلاعات هوا
+    })
+    .catch(error => {
+        document.getElementById("weather").innerHTML = `Error: ${error.message}`;
+    });
