@@ -1,4 +1,4 @@
-const apiKey = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/iran?unitGroup=us&key=VSRHEL89K87LGNC5SXTDV6FC9&contentType=json';
+const apiKey = '950a330e0fdb4cf2872121843242410'; // کلید API شما از WeatherAPI
 
 function getWeather() {
     if (navigator.geolocation) {
@@ -7,7 +7,6 @@ function getWeather() {
             const lon = position.coords.longitude;
 
             document.getElementById('location').innerText = `Latitude: ${lat}, Longitude: ${lon}`;
-
             fetchWeather(lat, lon);
         });
     } else {
@@ -16,16 +15,17 @@ function getWeather() {
 }
 
 function fetchWeather(lat, lon) {
-    const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${lat},${lon}?unitGroup=metric&key=${apiKey}`;
+    const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lat},${lon}&aqi=no`;
 
     fetch(url)
         .then(response => response.json())
         .then(data => {
             const weatherData = `
-                Weather: ${data.currentConditions.conditions} <br>
-                Temperature: ${data.currentConditions.temp}°C <br>
-                Humidity: ${data.currentConditions.humidity}% <br>
-                Wind Speed: ${data.currentConditions.windspeed} m/s
+                Location: ${data.location.name}, ${data.location.country} <br>
+                Temperature: ${data.current.temp_c}°C <br>
+                Condition: ${data.current.condition.text} <br>
+                Humidity: ${data.current.humidity}% <br>
+                Wind Speed: ${data.current.wind_kph} kph
             `;
             document.getElementById("weather").innerHTML = weatherData;
         })
