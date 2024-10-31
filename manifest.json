@@ -1,1 +1,26 @@
-   {       "content_security_policy": {           "extension_pages": "script-src 'self' 'unsafe-eval'; object-src 'self'"       }   }   
+{
+    "manifest_version": 3,
+    "name": "Your Extension Name",
+    "version": "1.0",
+    "permissions": [
+        
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["assets/main.js"]
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": ["assets/*"],
+            "matches": ["<all_urls>"]
+        }
+    ],
+    "content_security_policy": {
+        "extension_pages": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+    }
+}
