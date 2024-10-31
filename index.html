@@ -1,19 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather App</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+    <title>وضعیت آب و هوا</title>   
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">   
+    <style>
+                body {
+                        background: linear-gradient(to right, #00c6ff, #0072ff);
+                        color: white;
+                        font-family: 'Arial', sans-serif;
+
+        }
+
+                .weather-card {
+                        background-color: rgba(255, 255, 255, 0.1);
+                        border-radius: 10px;
+                        padding: 20px;
+                        margin-top: 20px;
+
+        }
+
+                .temp {
+                        font-size: 48px;
+
+        }
+
+
+    </style>
 </head>
 <body>
-    <div id="app">
-        <h1>Weather App</h1>
-        <p id="location"></p>
-        <p id="weather"></p>
-        <button onclick="getWeather()">Refresh Weather</button>
-    </div>
-
-    <script src="app.js"></script>
+    <div class="mt-5 container">        <h1 class="text-center">وضعیت آب و هوا</h1>        <div id="weather" class="weather-card text-center"></div>        <button id="refresh" class="btn btn-light mt-3">بارگذاری مجدد</button>    </div>   
+    <script>const apiKey = 'c9a4f275e624bc5e0f1f74643b945e88'; // کلید API خود را اینجا قرار دهید        function getWeather(lat, lon) {            fetch(https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&lang=fa&units=metric)                .then(response => {                    if (!response.ok) {                        throw new Error('خطا در دریافت اطلاعات');                    }                    return response.json();                })                .then(data => {                    const weatherDiv = document.getElementById('weather');                    weatherDiv.innerHTML =                         <h2>${data.name}</h2>                        <div class="temp">${Math.round(data.main.temp)} °C</div>                        <p>${data.weather[0].description}</p>                        <p>رطوبت: ${data.main.humidity}%</p>                        <p>سرعت باد: ${data.wind.speed} m/s</p>                    ;                })                .catch(error => {                    const weatherDiv = document.getElementById('weather');                    weatherDiv.innerHTML = <p class="text-danger">${error.message}</p>;                });        }        function fetchWeather() {            if (navigator.geolocation) {                navigator.geolocation.getCurrentPosition(position => {                    const lat = position.coords.latitude;                    const lon = position.coords.longitude;                    getWeather(lat, lon);                }, () => {                    alert('عدم دسترسی به موقعیت جغرافیایی.');                });            } else {                alert('Geolocation is not supported by this browser.');            }        }        document.getElementById('refresh').addEventListener('click', fetchWeather);        // بارگذاری اولیه        fetchWeather();</script>
 </body>
 </html>
